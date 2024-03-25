@@ -61,18 +61,7 @@ for /l %%f in (0, 1, 5) do (
 	)
 )
 
-echo Scrambling...
 
-set x=0
-for %%n in (z a s x b g n h d f c v) do (
-	set moves[!x!]=!keys[%%n]!
-	set /a x=!x!+1
-)
-
-for /l %%f in (0, 1, 100) do (
-	set /a res=!random! %% 12
-	call call:rotate %%moves[!res!]%%
-)
 
 :start
 cls
@@ -87,6 +76,18 @@ echo    ^| ^|___^| ^|_^| ^| ^|_^) ^| ^|___
 echo     \____^|\___/^|____/^|_____^|
 echo             by GiAnMMV
 pause
+echo Scrambling...
+
+set x=0
+for %%n in (z a s x b g n h d f c v) do (
+	set moves[!x!]=!keys[%%n]!
+	set /a x=!x!+1
+)
+
+for /l %%f in (0, 1, 100) do (
+	set /a res=!random! %% 12
+	call call:rotate %%moves[!res!]%%
+)
 
 :loop
 cls
@@ -123,10 +124,10 @@ echo          \/
 set /p "com=Enter command: "
 call:rotate !keys[%com%]!
 set com=
-for %%f in (0, 9, 45) do (
+for /l %%f in (0, 9, 45) do (
 	set /a res=%%f+1
-	set /a res2=%%f+9
-	for %%n in (!res!, 1, !res2!) do (
+	set /a res2=%%f+8
+	for /l %%n in (!res!, 1, !res2!) do (
 		if not !a[%%f]!==!a[%%n]! goto loop
 	)
 )
