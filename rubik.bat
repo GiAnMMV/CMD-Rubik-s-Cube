@@ -137,7 +137,7 @@ goto end
 cls
 echo You won^^! Congratulations^^!
 pause
-goto loop
+goto start
 
 :rotate
 set r1=%~1
