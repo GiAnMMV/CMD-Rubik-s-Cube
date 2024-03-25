@@ -30,8 +30,8 @@ set ri_z_2=20 23 26 47 50 53 33 30 27 34 28 35 32 29  2  1  0 42 39 36
 
 set keys[z]="%le_y_1%" "%le_y_2%"
 set keys[a]="%le_y_2%" "%le_y_1%"
-set keys[s]="%ri_y_1%" "%ri_y_2%"
-set keys[x]="%ri_y_2%" "%ri_y_1%"
+set keys[x]="%ri_y_1%" "%ri_y_2%"
+set keys[s]="%ri_y_2%" "%ri_y_1%"
 set keys[b]="%le_z_1%" "%le_z_2%"
 set keys[g]="%le_z_2%" "%le_z_1%"
 set keys[n]="%ri_z_1%" "%ri_z_2%"
