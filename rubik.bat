@@ -123,7 +123,14 @@ echo          \/
 set /p "com=Enter command: "
 call:rotate !keys[%com%]!
 set com=
-goto loop
+for %%f in (0, 9, 45) do (
+	set /a res=%%f+1
+	set /a res2=%%f+9
+	for %%n in (!res!, 1, !res2!) do (
+		if not !a[%%f]!==!a[%%n]! goto loop
+	)
+)
+goto end
 
 :end
 cls
