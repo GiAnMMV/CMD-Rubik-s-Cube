@@ -51,11 +51,11 @@ set keys[%keys_rotate:~4,1%]="%up_x_1% %md_x_1% %dw_x_1%" "%up_x_2% %md_x_2% %dw
 set keys[%keys_rotate:~5,1%]="%up_x_2% %md_x_2% %dw_x_2%" "%up_x_1% %md_x_1% %dw_x_1%"
 
 set colors[0]= 
-set colors[1]=#
-set colors[2]=O
-set colors[3]=%%
-set colors[4]=@
-set colors[5]=.
+set colors[1]=[31m#[0m
+set colors[2]=[34mO[0m
+set colors[3]=[33m%%[0m
+set colors[4]=[32m@[0m
+set colors[5]=[93m.[0m
 
 for /l %%f in (0, 1, 5) do (
 	for /l %%x in (0,1,8) do (
@@ -87,7 +87,7 @@ for /l %%f in (0, 1, 100) do (
 	call call call:rotate %%%%keys[%%keys_moves:~!res!,1%%]%%%%
 	<nul set /p=^|
 )
-echo.
+set count=0
 
 :loop
 cls
@@ -96,7 +96,7 @@ echo         /%a[0]%%a[0]%\
 echo        /%a[0]%%a[0]%%a[0]%%a[0]%\
 echo       /\%a[0]%%a[0]%%a[0]%%a[0]%/\
 echo      /%a[3]%%a[3]%\%a[0]%%a[0]%/%a[1]%%a[1]%\
-echo     /%a[3]%%a[3]%%a[3]%%a[3]%\/%a[1]%%a[1]%%a[1]%%a[1]%\
+echo     /%a[3]%%a[3]%%a[3]%%a[3]%\/%a[1]%%a[1]%%a[1]%%a[1]%\       Moves: %count%
 echo    /\%a[3]%%a[3]%%a[3]%%a[3]%/\%a[1]%%a[1]%%a[1]%%a[1]%/\      +---------------------+
 echo   /%a[6]%%a[6]%\%a[3]%%a[3]%/%a[4]%%a[4]%\%a[1]%%a[1]%/%a[2]%%a[2]%\     ^|      Controls:      ^|
 echo  /%a[6]%%a[6]%%a[6]%%a[6]%\/%a[4]%%a[4]%%a[4]%%a[4]%\/%a[2]%%a[2]%%a[2]%%a[2]%\    +----------+----------+
@@ -123,11 +123,14 @@ echo        \%a[17]%^|^|%a[24]%/
 echo         \^|^|/
 echo          \/
 
-if !com!a==a (set /p "com=Enter command: ") else set com=!com:~1!
+if defined com set com=!com:~1!
+if not defined com (set /p "com=Enter command: ")
+if not defined com goto loop
 if /i !com!==exit cls & goto exit
-call call:rotate %%keys[!com:~0,1!]%%
 
-if not %keys_moves%==!keys_moves:%com:~0,1%=! (
+call:rotate !keys[%com:~0,1%]!
+
+if not "%keys_moves%"=="!keys_moves:%com:~0,1%=!" (
 	set /a count+=1
 	for /l %%f in (0, 9, 45) do (
 		set /a res=%%f+1
@@ -143,7 +146,7 @@ goto loop
 :end
 cls
 echo You won^^! Congratulations^^!
-echo Total moves: %count%
+echo You solved the cube in %count% moves.
 pause
 endlocal
 exit /b
