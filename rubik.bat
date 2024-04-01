@@ -1,5 +1,5 @@
-setlocal enabledelayedexpansion
 @echo off
+setlocal enabledelayedexpansion
 
 set up_x_1= 0  1  2  3  5  6  7  8  9 10 11 18 19 20 27 28 29 36 37 38
 set up_x_2= 2  5  8  1  7  0  3  6 36 37 38  9 10 11 18 19 20 27 28 29
