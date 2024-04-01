@@ -131,7 +131,7 @@ if /i %com%==y (
 	exit /b
 )
 if /i %com%==n (
-	com=
+	set com=
 	goto loop
 )
 echo Invalid selection.
